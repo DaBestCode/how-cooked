@@ -1,4 +1,4 @@
-# How Cooked Am I? + Aura Check
+# How Cooked Am I?
 
 A tiny Cubbie Skill with two student status checks powered by real Canvas deadlines and Calendar data.
 
