@@ -1,12 +1,13 @@
 # How Cooked Am I?
 
-A tiny Cubbie Skill with two student status checks powered by real Canvas deadlines and Calendar data.
+A tiny Cubbie Skill with two student status checks plus an unofficial reviewer for other public Cubbie Skills.
 
 ```text
-STUDENT STATUS MENU
+CUBBIE SCORE LAB
 1. How Cooked Am I? 🔥
 2. Aura Check ✨
-Reply 1 or 2.
+3. Skill Rizz Check 🧪
+Reply 1, 2, or 3.
 ```
 
 ## Example
@@ -24,6 +25,8 @@ The score measures near-term workload pressure for entertainment. It does not pr
 
 Aura Check starts at 50 and moves only from visible academic signals: submitted upcoming work, planned focus time, overdue work, and open work due within 24 hours. It rates academic momentum for fun, not the student's worth or personality.
 
+Skill Rizz Check accepts another participant's public GitHub Skill link and returns an unofficial evidence-based score for its hook, usefulness, Cubbie fit, originality, and shippability. It reads repositories without installing or running their code.
+
 ## Install
 
 Install this repository as an Agent Skill in Cubbie, then text:
@@ -32,6 +35,7 @@ Install this repository as an Agent Skill in Cubbie, then text:
 cubbie rate me
 cubbie how cooked am i
 cubbie check my aura
+cubbie rate this skill https://github.com/example/student-skill
 ```
 
 Canvas provides assignments and due dates. Google Calendar makes the score and suggested lock-in time more useful. If Calendar is unavailable, the Skill can still score Canvas deadlines.
