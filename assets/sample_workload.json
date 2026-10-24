@@ -2,6 +2,7 @@
   "now": "2026-10-24T14:00:00-07:00",
   "window_hours": 72,
   "available_minutes": 120,
+  "planned_focus_minutes": 120,
   "tasks": [
     {
       "name": "Project 2",
@@ -22,6 +23,13 @@
       "course": "ENG 102",
       "due": "2026-10-26T18:00:00-07:00",
       "submitted": false,
+      "kind": "assignment"
+    },
+    {
+      "name": "Discussion post",
+      "course": "ENG 102",
+      "due": "2026-10-27T09:00:00-07:00",
+      "submitted": true,
       "kind": "assignment"
     }
   ]

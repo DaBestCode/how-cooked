@@ -104,6 +104,81 @@ class CookScoreTests(unittest.TestCase):
         self.assertEqual(result["open_tasks_in_window"], 1)
 
 
+class AuraScoreTests(unittest.TestCase):
+    def test_rewards_being_ahead_and_planned_focus(self):
+        result = cook.calculate_aura(
+            {
+                "now": "2026-10-24T12:00:00-07:00",
+                "window_hours": 168,
+                "planned_focus_minutes": 120,
+                "tasks": [
+                    {
+                        "name": "Essay",
+                        "course": "ENG 102",
+                        "due": "2026-10-26T12:00:00-07:00",
+                        "submitted": True,
+                    },
+                    {
+                        "name": "Quiz",
+                        "course": "MAT 266",
+                        "due": "2026-10-27T12:00:00-07:00",
+                        "submitted": True,
+                    },
+                ],
+            }
+        )
+
+        self.assertEqual(result["score"], 80)
+        self.assertEqual(result["level"], "campus main character")
+        self.assertEqual(result["signals"]["submitted_ahead"], 2)
+        self.assertEqual(result["signals"]["overdue"], 0)
+
+    def test_docks_overdue_and_last_minute_work(self):
+        result = cook.calculate_aura(
+            {
+                "now": "2026-10-24T12:00:00-07:00",
+                "planned_focus_minutes": 0,
+                "tasks": [
+                    {
+                        "name": "Late lab",
+                        "course": "BIO 181",
+                        "due": "2026-10-23T12:00:00-07:00",
+                        "submitted": False,
+                    },
+                    {
+                        "name": "Quiz",
+                        "course": "MAT 266",
+                        "due": "2026-10-24T18:00:00-07:00",
+                        "submitted": False,
+                    },
+                ],
+            }
+        )
+
+        self.assertEqual(result["score"], 35)
+        self.assertEqual(result["level"], "side-quest energy")
+        self.assertEqual(result["biggest_drain"]["name"], "Late lab")
+
+    def test_aura_clamps_at_one_hundred(self):
+        result = cook.calculate_aura(
+            {
+                "now": "2026-10-24T12:00:00-07:00",
+                "planned_focus_minutes": 240,
+                "tasks": [
+                    {
+                        "name": f"Finished task {number}",
+                        "due": "2026-10-26T12:00:00-07:00",
+                        "submitted": True,
+                    }
+                    for number in range(5)
+                ],
+            }
+        )
+
+        self.assertEqual(result["score"], 100)
+        self.assertEqual(result["level"], "mythic office-hours lore")
+
+
 if __name__ == "__main__":
     unittest.main()
 
